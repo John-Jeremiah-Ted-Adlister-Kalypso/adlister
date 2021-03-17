@@ -1,4 +1,6 @@
 *.iml
 target/
 .idea/
+edit-delete-ads
 Config.java
+pom.xml
