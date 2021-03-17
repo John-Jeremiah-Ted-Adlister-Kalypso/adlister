@@ -15,6 +15,16 @@ public class ListAdsDao implements Ads {
         return ads;
     }
 
+    @Override
+    public void deleteByID(long id) {
+        System.out.println("You done messed up man.");
+    }
+
+    @Override
+    public List<Ad> byUserID(long id) {
+        return null;
+    }
+
     public Long insert(Ad ad) {
         // make sure we have ads
         if (ads == null) {
