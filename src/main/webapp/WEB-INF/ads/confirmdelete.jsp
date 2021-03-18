@@ -11,7 +11,7 @@
 <head>
 <jsp:include page="/WEB-INF/partials/head.jsp" />
     <title>Your ad has been deleted.</title>
-    <meta http-equiv="Refresh" content="5;url=/profile" />
+    <meta http-equiv="Refresh" content="3;url=/profile" />
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
