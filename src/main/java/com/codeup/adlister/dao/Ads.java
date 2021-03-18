@@ -9,7 +9,8 @@ public interface Ads {
     Long insert(Ad ad);
 
     List<Ad> byUserID(long id);
-    void deleteByID(long id);
+    Boolean deleteByID(long id);
+    Ad byAdID(long id);
+    public void updateAdByID(long id, String title, String description);
 
-    List<Ad> search(String term);
 }

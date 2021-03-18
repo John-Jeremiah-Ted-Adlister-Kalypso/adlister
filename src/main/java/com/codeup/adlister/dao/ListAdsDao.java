@@ -16,8 +16,21 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public void deleteByID(long id) {
+    public Boolean deleteByID(long id) {
         System.out.println("You done messed up man.");
+        return false;
+    }
+
+    @Override
+    public Ad byAdID(long id) {
+        System.out.println("you still done messed up, hombre.");
+        Ad ad = new Ad(1,1,"This shouldn't exist!", "BUT IT DOES!!!!!");
+        return ad;
+    }
+
+    public void updateAdByID(long id, String title, String description) {
+        System.out.println("Boy you're in a whole MESS of trouble.");
+//        return 42;
     }
 
     @Override
