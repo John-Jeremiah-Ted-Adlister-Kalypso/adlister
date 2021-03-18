@@ -34,6 +34,11 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> search(String term) {
+        return null;
+    }
+
+    @Override
     public List<Ad> byUserID(long id) {
         return null;
     }

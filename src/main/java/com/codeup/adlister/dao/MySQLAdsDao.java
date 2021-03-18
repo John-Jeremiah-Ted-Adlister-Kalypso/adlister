@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +64,9 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+
     public Boolean deleteByID(long id) {
+
         String query = "DELETE FROM ads WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -119,6 +118,36 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
+        }
+        return ads;
+    }
+    @Override
+    public List<Ad> search(String term){
+        String sql = "SELECT * FROM ads WHERE title LIKE ?";
+        String searchTermWithWildcards = "%" + term + "%";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, searchTermWithWildcards);
+
+            ResultSet rs = stmt.executeQuery();
+            return generateAds(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // transforms the resultset into a java list
+    private List<Ad> generateAds(ResultSet rs) throws SQLException {
+        List<Ad> ads = new ArrayList<>();
+        while (rs.next()){
+            ads.add(new Ad(
+                    rs.getLong("id"),
+                    rs.getLong("user_id"),
+                    rs.getString("title"),
+                    rs.getString("description")
+            ));
         }
         return ads;
     }
