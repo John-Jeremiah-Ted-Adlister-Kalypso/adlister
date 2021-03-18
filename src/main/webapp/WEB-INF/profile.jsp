@@ -10,12 +10,9 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container-fluid">
-    <div>
-        <img class="img-fluid width" alt="Responsive image" src="http://placehold.jp/851x250.png">
-    </div>
 <jsp:include page="partials/profileEdit.jsp"/>
     <div>
-        <img class="profilePic" src="http://placehold.jp/150x150.png">
+        <a href="#" ><img class="profilePic" src="http://placehold.jp/150x150.png"> <span>edit pic</span></a>
     </div>
     <div>
         <h1>Welcome, ${sessionScope.user.username}!</h1>
