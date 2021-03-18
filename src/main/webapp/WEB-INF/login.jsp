@@ -6,6 +6,10 @@
     </jsp:include>
 </head>
 <body>
+<script>
+    var redirect = document.referrer;
+    document.getElementById("redirect").value = redirect;
+</script>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
         <h1>Please Log In</h1>
@@ -18,6 +22,7 @@
                 <label for="password">Password</label>
                 <input id="password" name="password" class="form-control" type="password">
             </div>
+            <input type="hidden" id="redirect" name="redirect">
             <input type="submit" class="btn btn-primary btn-block" value="Log In">
         </form>
     </div>

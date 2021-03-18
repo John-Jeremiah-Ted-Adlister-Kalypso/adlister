@@ -17,7 +17,7 @@
 <c:forEach var="product" items="${searchResults}"><jsp:useBean id="ad" scope="request" type="sun.awt.shell.ShellFolderColumnInfo"/>
 
     <h3>
-            ${ad.title}
+        <a href="detail?id=${ad.id}">${ad.title}</a>
     </h3>
 </c:forEach>
 </body>
