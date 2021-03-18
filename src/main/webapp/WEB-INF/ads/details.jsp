@@ -54,5 +54,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="../partials/script.jsp"/>
 </body>
 </html>
