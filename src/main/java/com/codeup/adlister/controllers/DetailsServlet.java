@@ -19,31 +19,40 @@ import static java.lang.Integer.parseInt;
 public class DetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = parseInt(request.getParameter("id"));
-        Ad displayAd = null;
-//        Ad testAd = new Ad(1, 1, "Look at this great ad", "It's right here for you.");
-        List<Ad> adList = getAdsDao().all();
-        for (Ad ad : adList) {
-            if (ad.getId() == id) {
-                displayAd = ad;
-            }
-        }
+        System.out.println(id);
+//        System.out.println(id);
+        Ad displayAd = DaoFactory.getAdsDao().byAdID(id);
+
+        //        Ad testAd = new Ad(1, 1, "Look at this great ad", "It's right here for you.");
+//        List<Ad> adList = getAdsDao().all();
+//        for (Ad ad : adList) {
+//            if (ad.getId() == id) {
+//                displayAd = ad;
+//            }
+//        }
+
         if (displayAd == null) {
             response.getWriter().println("<h1>Hey, sorry, something went wrong</h1>");
-        } else {
-            User displayUser = DaoFactory.getUsersDao().findByUserID(displayAd.getUserId());
+        }
+        User displayUser = DaoFactory.getUsersDao().findByUserID(displayAd.getUserId());
+        if (request.getSession().getAttribute("user") != null)
+        {
             User user = (User)request.getSession().getAttribute("user");
             if (user.getId() == displayUser.getId()) {
                 request.setAttribute("isOwner", true);
-            }
+            }}
             request.setAttribute("displayAd", displayAd);
             request.setAttribute("displayUser", displayUser);
             request.getRequestDispatcher("/WEB-INF/ads/details.jsp").forward(request, response);
-        }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Ad ad = (Ad)request.getAttribute("displayAd");
-        DaoFactory.getAdsDao().deleteByID(ad.getId());
-        response.sendRedirect("/profile");
+        long id = parseInt(request.getParameter("adID"));
+        System.out.println(id);
+        System.out.println(id);
+        DaoFactory.getAdsDao().deleteByID(id);
+        response.sendRedirect("/confirmdelete");}
+
     }
-}
+

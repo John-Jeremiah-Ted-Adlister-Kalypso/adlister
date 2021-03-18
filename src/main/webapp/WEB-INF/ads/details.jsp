@@ -26,8 +26,8 @@
         <p>Posted by: ${displayUser.username}. Email at: ${displayUser.email}</p>
 
         <c:if test="${isOwner}">
-            <button type="button" class="btn btn-primary">Edit</button>
-            <button type="submit" formmethod="post" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <a href="/edit?id=${displayAd.id}"><button type="button" class="btn btn-primary">Edit</button></a>
+            <button type="submit" formmethod="post" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
 
@@ -35,7 +35,7 @@
     </div>
     </div>
 
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,11 +48,15 @@
                 <p>There is no way to recover your ad if you delete it. Are you sure you want to proceed?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="/details" method="post">
+                    <input type="hidden" class="d-none" name="adID" value="${displayAd.id}">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></form>
             </div>
         </div>
     </div>
 </div>
+
+<jsp:include page="/WEB-INF/partials/script.jsp" />
 </body>
 </html>

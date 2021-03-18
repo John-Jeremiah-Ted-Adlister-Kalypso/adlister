@@ -10,5 +10,7 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
     List<Ad> byUserID(long id);
-    void deleteByID(long id);
+    Boolean deleteByID(long id);
+    Ad byAdID(long id);
+    public void updateAdByID(long id, String title, String description);
 }

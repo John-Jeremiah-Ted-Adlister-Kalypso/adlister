@@ -67,13 +67,43 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public void deleteByID(long id) {
-        String query = "DROP * FROM ads WHERE id = ?";
+    public Boolean deleteByID(long id) {
+        String query = "DELETE FROM ads WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1,id);
-            stmt.executeQuery();
+            return stmt.execute();
         } catch (SQLException e) {throw new RuntimeException("Error deleting ad.", e);}
+    }
+
+    @Override
+    public Ad byAdID(long id) {
+        String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1,id);
+            ResultSet rs = stmt.executeQuery();
+            List <Ad> ads = createAdsFromResults(rs);
+            return ads.get(0);
+        } catch (SQLException e) {throw new RuntimeException("Error finding ad by ID", e);}
+    }
+
+    @Override
+    public void updateAdByID(long id, String title, String description) {
+        String query ="UPDATE ads SET title=?, description=? WHERE id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            System.out.println(stmt);
+            stmt.setString(1, title);
+            System.out.println(title);
+            stmt.setString(2, description);
+            System.out.println(description);
+            stmt.setLong(3, id);
+            System.out.println(id);
+            stmt.executeUpdate();
+            System.out.println("It worked!");
+//            return rows;
+        } catch (SQLException e) {throw new RuntimeException("Error updating ad with id " + id);}
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
