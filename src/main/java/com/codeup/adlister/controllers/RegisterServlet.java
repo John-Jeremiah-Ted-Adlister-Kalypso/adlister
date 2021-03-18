@@ -13,6 +13,9 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("username", request.getParameter("username"));
+        request.setAttribute("email", request.getParameter("email"));
+        if(request.getParameter("alert") != null) {request.setAttribute("alert", request.getParameter("alert"));}
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -21,15 +24,23 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
-
+        User userExisting = new User("administrator","admin@adlister.com","password");
+        if (DaoFactory.getUsersDao().findByUsername(username) != null) {userExisting = DaoFactory.getUsersDao().findByUsername(username);}
+        System.out.println(userExisting.getUsername());
+        System.out.println(userExisting.getId());
+        System.out.println("userExisting.getUsername().equalsIgnoreCase(username) = " + userExisting.getUsername().equalsIgnoreCase(username));
         // validate input
         boolean inputHasErrors = username.isEmpty()
             || email.isEmpty()
             || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+            || (! password.equals(passwordConfirmation))
+            || userExisting.getUsername().equalsIgnoreCase(username);
 
         if (inputHasErrors) {
-            response.sendRedirect("/register");
+//            if (userExisting.getUsername().equalsIgnoreCase(username)) {request.setAttribute("alert", username);}
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);;
+            response.sendRedirect("/register?username="+username+"&email="+email+"&alert="+username);
             return;
         }
 
