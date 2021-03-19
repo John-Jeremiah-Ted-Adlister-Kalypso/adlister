@@ -7,10 +7,12 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Detailed View of Ad #${id}" />
+        <jsp:param name="title" value="Detailed View of Ad #${displayAd.id} - ${displayAd.title}" />
     </jsp:include>
 </head>
 <body>
@@ -21,13 +23,15 @@
 
 
     <div class="col-md-6">
-        <h2>${displayAd.id} - ${displayAd.title} </h2>
-        <p>${displayAd.description}</p>
-        <p>Posted by: ${displayUser.username}. Email at: ${displayUser.email}</p>
+        <h2><c:out value="${displayAd.id}" /> - <c:out value="${displayAd.title}" /> </h2>
+        <p><c:out value="${displayAd.description}" /></p>
+        <p>Posted by:<img src="<c:out value="${displayUser.avatar_filepath}" />" width="50px" height="50px"> ${displayUser.username} . Email at: <a href="mailto:<c:out value="${displayUser.email}" />?subject=Adlister%20Posting%20%3A%22<c:out value="${displayAd.title}" />%22&body=The%20Adlister%20posting%20at%3A%20http://localhost:8080/details?id=<c:out value="${displayAd.id}" />"> <c:out value="${displayUser.email}" /></a></p>
+        <small><p>Created ${displayAd.created_time}; <br>
+            Last modified ${displayAd.updated_time}</p></small>
 
         <c:if test="${isOwner}">
             <a href="/edit?id=${displayAd.id}"><button type="button" class="btn btn-primary">Edit</button></a>
-            <button type="submit" formmethod="post" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
 

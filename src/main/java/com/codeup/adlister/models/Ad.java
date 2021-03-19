@@ -1,10 +1,35 @@
 package com.codeup.adlister.models;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class Ad {
     private long id;
     private long userId;
     private String title;
     private String description;
+    private String created_time;
+    private String updated_time;
+    SimpleDateFormat sdf = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss");
+
+    public String getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(String created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getUpdated_time() {
+        return updated_time;
+    }
+
+    public void setUpdated_time(String updated_time) {
+        this.updated_time = updated_time;
+    }
+
+
 
     public Ad(long id, long userId, String title, String description) {
         this.id = id;
@@ -17,6 +42,15 @@ public class Ad {
         this.userId = userId;
         this.title = title;
         this.description = description;
+    }
+
+    public Ad(long id, long userId, String title, String description, Timestamp created_time, Timestamp updated_time) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.created_time = sdf.format(created_time);
+        this.updated_time = sdf.format(updated_time);
     }
 
     public long getId() {

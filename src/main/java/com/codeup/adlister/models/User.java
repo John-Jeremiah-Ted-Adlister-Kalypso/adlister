@@ -7,6 +7,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String avatar_filepath;
 
     public User() {}
 
@@ -21,6 +22,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(long id, String username, String email, String password, String avatar_filepath) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.avatar_filepath = avatar_filepath;
     }
 
     public long getId() {
@@ -53,5 +62,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = Password.hash(password);
+    }
+
+    public String getAvatar_filepath() {
+        return avatar_filepath;
+    }
+
+    public void setAvatar_filepath(String avatar_filepath, long id) {
+        this.avatar_filepath = avatar_filepath;
     }
 }
