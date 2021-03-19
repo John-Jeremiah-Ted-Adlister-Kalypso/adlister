@@ -19,7 +19,8 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <div class="input-group mb-3"> <input id="password" name="password" class="form-control" type="password" required value="${password}"> <div class="input-group-append">
+                <div class="input-group mb-3"> <input id="password" name="password" class="form-control" type="password" required value="${password}">
+                    <div class="input-group-append">
                     <span class="input-group-text"><i class="fa fa-eye-slash" id="togglePassword"></i></span></div></div>
             </div>
             <input type="hidden" id="redirect" name="redirect">

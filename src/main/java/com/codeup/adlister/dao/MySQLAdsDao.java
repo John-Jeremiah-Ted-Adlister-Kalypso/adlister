@@ -105,7 +105,9 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            rs.getTimestamp("created_time"),
+            rs.getTimestamp("updated_time")
         );
     }
 
@@ -141,7 +143,9 @@ public class MySQLAdsDao implements Ads {
                     rs.getLong("id"),
                     rs.getLong("user_id"),
                     rs.getString("title"),
-                    rs.getString("description")
+                    rs.getString("description"),
+                    rs.getTimestamp("created_time"),
+                    rs.getTimestamp("updated_time")
             ));
         }
         return ads;

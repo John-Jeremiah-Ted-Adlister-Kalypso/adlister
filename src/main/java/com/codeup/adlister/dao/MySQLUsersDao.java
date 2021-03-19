@@ -62,6 +62,17 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    @Override
+    public void updateAvatar(String filepath, long id) {
+        String query = "UPDATE users SET avatar_filepath = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1,filepath);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {throw new RuntimeException("Error updating user's Profile pictuer.");}
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;
@@ -70,7 +81,8 @@ public class MySQLUsersDao implements Users {
             rs.getLong("id"),
             rs.getString("username"),
             rs.getString("email"),
-            rs.getString("password")
+            rs.getString("password"),
+            rs.getString("avatar_filepath")
         );
     }
 

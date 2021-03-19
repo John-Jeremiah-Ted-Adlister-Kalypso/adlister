@@ -22,4 +22,13 @@ public class ViewProfileServlet extends HttpServlet {
         request.setAttribute("ads",DaoFactory.getAdsDao().byUserID(userID));
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String avatar_filepath = request.getParameter("avatar_filepath");
+        System.out.println("avatar_filepath = " + avatar_filepath);
+        User user = (User)request.getSession().getAttribute("user");
+    DaoFactory.getUsersDao().updateAvatar(avatar_filepath, user.getId());
+        response.sendRedirect("/profile");
+
+    }
 }
