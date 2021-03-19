@@ -1,5 +1,9 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Category;
+
+import java.util.List;
+
 public class Ad {
     private long id;
     private long userId;
@@ -35,4 +39,6 @@ public class Ad {
     public void setDescription(String description) {
         this.description = description;
     }
+    List<Category> allCategories();
+
 }
