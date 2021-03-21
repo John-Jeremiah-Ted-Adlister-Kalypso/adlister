@@ -24,12 +24,23 @@
         <form action="/edit" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text" value="${ad.title}">
+                <input id="title" name="title" class="form-control" type="text" required value="${ad.title}">
             </div>
             <input type="hidden" class="d-none" name="id" value="${ad.id}">
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control" type="text">${ad.description}</textarea>
+                <textarea id="description" name="description" class="form-control" type="text" required>${ad.description}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Select All Categories that Apply</label>
+                <select multiple class="form-control" id="category" name="category" required>
+                    <%! int counter = 1; %>
+                    <c:forEach var="category" items="${categories}">
+                        <option value="<%= counter %>"<c:forEach var="selectedcategory" items="${ad.categories}"><c:if test="${category} eq ${selectedcategory}"> selected</c:if></c:forEach> name="category">${category}</option>
+                        <% counter += 1; %>
+                    </c:forEach>
+                </select>
+
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>

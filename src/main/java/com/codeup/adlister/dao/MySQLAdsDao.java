@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
 
@@ -107,7 +109,8 @@ public class MySQLAdsDao implements Ads {
             rs.getString("title"),
             rs.getString("description"),
             rs.getTimestamp("created_time"),
-            rs.getTimestamp("updated_time")
+            rs.getTimestamp("updated_time"),
+            getCategoriesByAdID(rs.getLong("id"))
         );
     }
 
@@ -135,6 +138,62 @@ public class MySQLAdsDao implements Ads {
         return null;
     }
 
+    @Override
+    public List<String> allCategories() {
+        PreparedStatement stmt = null;
+        List<String> categoryResult = new ArrayList<>();
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM categories");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                categoryResult.add(rs.getString("name"));
+            }
+            return categoryResult;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error pulling Categories");
+        }
+    }
+
+    @Override
+    public List<String> getCategoriesByAdID(long id) {
+        List<String> categories = new ArrayList<>();
+        String sql = "SELECT name FROM categories " +
+                "JOIN ads_categories ON categories.cat_id = ads_categories.cat_id JOIN ads ON ads.id = ads_categories.ad_id  WHERE ads.id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                categories.add(rs.getString("name"));
+            }
+            return categories;
+        } catch (SQLException e) {throw new RuntimeException("Error finding ad categories with id " + id);}
+    }
+
+    @Override
+    public void addCategoriesByAdID(long id, String[] categories) {
+        String sql = "INSERT INTO ads_categories (ad_id, cat_id)" +
+                "VALUES (?,?)";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            for (int i = 0; i < categories.length; i++) {
+            stmt.setLong(1, id);
+            stmt.setLong(2,parseInt(categories[i]));
+            stmt.executeUpdate();
+            }
+
+        } catch (SQLException e) {throw new RuntimeException("Error adding categories to Ad");}
+    }
+
+    public void deleteAllCategoriesByAdID(long id) {
+        String sql = "DELETE FROM ads_categories WHERE ad_id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, id);
+            stmt.execute();
+        } catch (SQLException e) {throw new RuntimeException("Error updating categories to Ad");}
+    }
+
     // transforms the resultset into a java list
     private List<Ad> generateAds(ResultSet rs) throws SQLException {
         List<Ad> ads = new ArrayList<>();
@@ -145,7 +204,8 @@ public class MySQLAdsDao implements Ads {
                     rs.getString("title"),
                     rs.getString("description"),
                     rs.getTimestamp("created_time"),
-                    rs.getTimestamp("updated_time")
+                    rs.getTimestamp("updated_time"),
+                    getCategoriesByAdID(rs.getLong("id"))
             ));
         }
         return ads;

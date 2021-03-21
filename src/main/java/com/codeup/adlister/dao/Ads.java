@@ -11,6 +11,10 @@ public interface Ads {
     List<Ad> byUserID(long id);
     Boolean deleteByID(long id);
     Ad byAdID(long id);
-    public void updateAdByID(long id, String title, String description);
+    void updateAdByID(long id, String title, String description);
+    List<String> getCategoriesByAdID(long id);
+    List<String> allCategories();
+    void addCategoriesByAdID(long id, String[] categories);
+    void deleteAllCategoriesByAdID(long id);
 
 }

@@ -28,6 +28,8 @@ public class EditServlet extends HttpServlet {
         if (user.getId() == displayUser.getId()) {
             request.setAttribute("isOwner", true);
         }
+        request.setAttribute("categories", DaoFactory.getAdsDao().allCategories());
+        System.out.println("displayAd.getCategories() = " + displayAd.getCategories());
         request.setAttribute("ad", displayAd);
         request.getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
 
@@ -41,6 +43,9 @@ public class EditServlet extends HttpServlet {
         System.out.println(request.getParameter("title"));
         System.out.println(request.getParameter("description"));
         DaoFactory.getAdsDao().updateAdByID(id,request.getParameter("title"),request.getParameter("description"));
+        String[] categories = request.getParameterValues("category");
+        DaoFactory.getAdsDao().deleteAllCategoriesByAdID(id);
+        DaoFactory.getAdsDao().addCategoriesByAdID(id, categories);
         response.sendRedirect("/details?id=" + id);
     }
 }
