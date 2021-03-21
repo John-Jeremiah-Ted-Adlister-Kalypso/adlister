@@ -20,17 +20,8 @@ public class DetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = parseInt(request.getParameter("id"));
         System.out.println(id);
-//        System.out.println(id);
         Ad displayAd = DaoFactory.getAdsDao().byAdID(id);
-
-        //        Ad testAd = new Ad(1, 1, "Look at this great ad", "It's right here for you.");
-//        List<Ad> adList = getAdsDao().all();
-//        for (Ad ad : adList) {
-//            if (ad.getId() == id) {
-//                displayAd = ad;
-//            }
-//        }
-
+        List<String> categories = DaoFactory.getAdsDao().getCategoriesByAdID(id);
         if (displayAd == null) {
             response.getWriter().println("<h1>Hey, sorry, something went wrong</h1>");
         }
@@ -41,7 +32,9 @@ public class DetailsServlet extends HttpServlet {
             if (user.getId() == displayUser.getId()) {
                 request.setAttribute("isOwner", true);
             }}
-            request.setAttribute("displayAd", displayAd);
+//        System.out.println("displayAd.getCategories() = " + displayAd.getCategories());
+//        System.out.println("displayAd.getCategories().get(0) = " + displayAd.getCategories().get(0));
+        request.setAttribute("displayAd", displayAd);
             request.setAttribute("displayUser", displayUser);
             request.getRequestDispatcher("/WEB-INF/ads/details.jsp").forward(request, response);
 

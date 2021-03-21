@@ -3,6 +3,7 @@ package com.codeup.adlister.models;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Ad {
     private long id;
@@ -11,7 +12,16 @@ public class Ad {
     private String description;
     private String created_time;
     private String updated_time;
+    private List<String> categories;
     SimpleDateFormat sdf = new SimpleDateFormat("E, MMM dd yyyy HH:mm:ss");
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 
     public String getCreated_time() {
         return created_time;
@@ -52,6 +62,18 @@ public class Ad {
         this.created_time = sdf.format(created_time);
         this.updated_time = sdf.format(updated_time);
     }
+
+    public Ad(long id, long userId, String title, String description, Timestamp created_time, Timestamp updated_time, List<String> categories) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.created_time = sdf.format(created_time);
+        this.updated_time = sdf.format(updated_time);
+        this.categories = categories;
+    }
+
+
 
     public long getId() {
         return id;

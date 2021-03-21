@@ -25,6 +25,7 @@
     <div class="col-md-6">
         <h2><c:out value="${displayAd.id}" /> - <c:out value="${displayAd.title}" /> </h2>
         <p><c:out value="${displayAd.description}" /></p>
+        <p>Categories for this ad: <c:forEach var="category" varStatus="loop" items="${displayAd.categories}"> ${category}<c:if test="${!loop.last}">,</c:if> </c:forEach> </p>
         <p>Posted by:<img src="<c:out value="${displayUser.avatar_filepath}" />" width="50px" height="50px"> ${displayUser.username} . Email at: <a href="mailto:<c:out value="${displayUser.email}" />?subject=Adlister%20Posting%20%3A%22<c:out value="${displayAd.title}" />%22&body=The%20Adlister%20posting%20at%3A%20http://localhost:8080/details?id=<c:out value="${displayAd.id}" />"> <c:out value="${displayUser.email}" /></a></p>
         <small><p>Created ${displayAd.created_time}; <br>
             Last modified ${displayAd.updated_time}</p></small>
