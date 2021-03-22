@@ -41,7 +41,7 @@ public class ProfileEditServlet extends HttpServlet {
             User updateUser = new User(user.getId(),user.getUsername(), updatedEmail, newpassword);
             DaoFactory.getUsersDao().updateUser(updateUser);
             request.getSession().invalidate();
-            request.setAttribute("alert", "Success! Your profile has been updated! Please login to confirm changes!");
+            request.setAttribute("alert", " <div class='alert alert-success alert-dismissible fade show' role='alert'>Success! Your profile has been updated! Please login to confirm changes!");
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
         else {
