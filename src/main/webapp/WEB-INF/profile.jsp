@@ -21,12 +21,14 @@
         <h1>Welcome, ${sessionScope.user.username}!</h1>
     </div>
 
+    <p>Your username is: ${user.username}</p>
+    <p>Your current email is: ${user.email}</p>
+
 <c:choose>
     <c:when test="${ads.isEmpty()}">
         <h2>You haven't created any ads (yet).</h2>
         <h1>Maybe you should <a href="ads/create">try it out?</a></h1>
     </c:when>
-
     <c:otherwise>
         <div class="row">
         <c:forEach var="ad" items="${ads}">

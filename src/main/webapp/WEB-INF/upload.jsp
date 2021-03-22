@@ -17,6 +17,8 @@
     <form method="post" action="/upload"
           enctype="multipart/form-data">
         Select file to upload: <input type="file" name="file" size="60" /><br />
+
+        <input hidden name="ad_id" value="10">
         <br /> <input type="submit" value="Upload" />
     </form>
 

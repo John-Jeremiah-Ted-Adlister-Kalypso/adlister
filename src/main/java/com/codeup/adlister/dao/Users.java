@@ -9,4 +9,5 @@ public interface Users {
     User findByUserID(long id);
     Long insert(User user);
     void updateAvatar(String filepath, long id);
+    void updateUser(User user);
 }

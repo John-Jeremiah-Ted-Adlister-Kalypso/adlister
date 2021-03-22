@@ -10,8 +10,27 @@
 <body>
 <div class="container">
     <h1>Create a new Ad</h1>
+
+    <br><br>
+    <form action="/upload" method="post">
+<%--        <form action="https://request-inspector.glitch.me/" method="post">--%>
+
+    </form>
+
+
     <form action="/ads/create" method="post">
 <%--    <form action="https://request-inspector.glitch.me/" method="post">--%>
+    <p>Once you have picked a title and description of your ad, you can add pictures.</p><br>
+<%--    <div class="d-flex flex-wrap"--%>
+<%--    <%! int counter1 = 1; %>--%>
+<%--    <c:forEach var="image" items="${images}">--%>
+<%--        <div class="form-check">--%>
+<%--            <label class="form-check-label"><img src="{image.filepath}" class="img-thumbnail" height="200px"></label>--%>
+<%--            <input class="form-check-input" type="checkbox" id="image${image.id}">--%>
+
+<%--    </c:forEach>--%>
+
+
     <div class="form-group">
             <label for="title">Title</label>
             <input id="title" name="title" class="form-control" type="text" required>
@@ -23,10 +42,10 @@
         <div class="form-group">
             <label for="category">Select All Categories that Apply</label>
             <select multiple class="form-control" id="category" name="category" required>
-                <%! int counter = 1; %>
+                <%! int counter2 = 1; %>
                 <c:forEach var="category" items="${categories}">
-                    <option value="<%= counter %>" name="category">${category}</option>
-                    <% counter += 1; %>
+                    <option value="<%= counter2 %>" name="category">${category}</option>
+                    <% counter2 += 1; %>
                 </c:forEach>
             </select>
 
