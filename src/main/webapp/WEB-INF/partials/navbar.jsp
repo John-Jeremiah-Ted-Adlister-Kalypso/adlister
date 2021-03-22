@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profileedit">Edit Profile</a>
+            </li>
             <li id="theme" class="nav-item" onclick="myFunction()">
                 <a class="nav-link" href="#">Theme</a>
             </li>
