@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <c:forEach var="ad" items="${ads}">
-            <div class="card" style="width: 20rem; padding: 10px; margin: 20px">
+            <div class="card" style="width: 20rem; padding: 10px; margin: 20px; box-shadow: 3px 3px 6px 7px #ccc">
                 <div class="card-body">
                     <h5 class="card-title"><a href="/details?id=${ad.id}"><c:out value="${ad.title}"/></a></h5>
                     <h6 class="card-subtitle mb-2 text-muted"> <h6 class="card-subtitle mb-2 text-muted">Category: <c:forEach var="category" varStatus="loop" items="${ad.categories}"> ${category}<c:if test="${!loop.last}">,</c:if> </c:forEach> </h6></h6>
@@ -27,5 +27,6 @@
 
     </div>
 </div>
+<jsp:include page="/WEB-INF/partials/script.jsp" />
 </body>
 </html>
