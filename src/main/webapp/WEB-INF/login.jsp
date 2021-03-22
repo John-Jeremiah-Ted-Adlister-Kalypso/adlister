@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <jsp:include page="/WEB-INF/partials/navbar2.jsp" />
 <div id="alert"><c:if test="${not empty alert}">
     <div class='alert alert-success alert-dismissible fade show' role='alert'>
     ${alert}

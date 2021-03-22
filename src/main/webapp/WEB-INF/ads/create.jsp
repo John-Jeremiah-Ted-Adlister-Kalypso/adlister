@@ -8,6 +8,7 @@
     </jsp:include>
 </head>
 <body>
+<jsp:include page="../partials/navbar.jsp"></jsp:include>
 <div class="container">
     <h1>Create a new Ad</h1>
 

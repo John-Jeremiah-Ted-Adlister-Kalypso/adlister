@@ -10,9 +10,8 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container">
-<jsp:include page="partials/profileEdit.jsp"/>
     <div>
-        <img class="profilePic" height="150px" width="150px" src="${sessionScope.user.avatar_filepath}">
+        <img src="${sessionScope.user.avatar_filepath}" alt="profile pic" class="profilePic" height="150px" width="150px" style="border-radius: 50%; margin: 20px; border: 2px solid black; border-radius: 50%">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profilePictureModal">
             Change Profile Picture
         </button>
@@ -32,12 +31,18 @@
     <c:otherwise>
         <div class="row">
         <c:forEach var="ad" items="${ads}">
-            <div class="col-md-6">
-                <h2><a href="details?id=${ad.id}">${ad.title}</a></h2>
-                <p>${ad.description}</p>
+            <div class="card" style="width: 20rem; padding: 10px; margin: 20px">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/details?id=${ad.id}"><c:out value="${ad.title}"/></a></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Category: <c:forEach var="category" varStatus="loop" items="${ad.categories}"> ${category}<c:if test="${!loop.last}">,</c:if> </c:forEach> </h6>
+                    <p class="card-text"><c:out value="${ad.description}"/><br><hr><br>
+                    <small>Created <c:out value="${ad.created_time}" /> <br>Last modified <c:out value="${ad.updated_time}" /></small>
+                </div>
             </div>
         </c:forEach>
+                <br>
         </div>
+            <br><hr><br>
         <h3>Do you need to <a href="ads/create">post some more?</a></h3>
     </c:otherwise>
 </c:choose>

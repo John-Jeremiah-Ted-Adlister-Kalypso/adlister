@@ -39,7 +39,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> byUserID(long id) {
-        String query = "SELECT * FROM ads WHERE user_id = ?";
+        String query = "SELECT * FROM ads WHERE user_id= ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1,id);
