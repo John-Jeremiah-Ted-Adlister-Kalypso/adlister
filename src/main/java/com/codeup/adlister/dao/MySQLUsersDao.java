@@ -73,6 +73,18 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {throw new RuntimeException("Error updating user's Profile pictuer.");}
     }
 
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET email=?, password=? WHERE id = ?";
+        try {PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getPassword());
+            stmt.setLong(3, user.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {throw new RuntimeException("Error updating profile for user id #"+ user.getId());}
+    }
+
+
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;

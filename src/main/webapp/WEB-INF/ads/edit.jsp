@@ -12,6 +12,14 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Editing Ad #${ad.id} - ${ad.title}" />
     </jsp:include>
+
+    <style>
+        .file {
+            visibility: hidden;
+            position: absolute;
+        }
+
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
@@ -21,7 +29,46 @@
 <c:choose>
 <c:when test="${isOwner}">
         <h1>Editing Ad #${ad.id} - ${ad.title}</h1>
-        <form action="/edit" method="post">
+
+
+<%--    <form method="post" id="/upload">--%>
+<%--&lt;%&ndash;    <form action="https://request-inspector.glitch.me/" method="post">&ndash;%&gt;--%>
+<%--        <div class="input-group mb-3">--%>
+<%--            <div class="custom-file">--%>
+<%--                <input type="file" class="custom-file-input" id="inputGroupFile02" name="file" accept="image/*">--%>
+<%--                <label class="custom-file-label" for="inputGroupFile02">Choose a picture (not required)</label>--%>
+<%--            </div>--%>
+<%--            <div class="input-group-append">--%>
+<%--                <button type="submit" class="btn btn-primary input-group-text" id="">Upload</button>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+
+<%--    </form>--%>
+<%--<div id="alert">--%>
+<%--    <c:if test="${not empty message}">--%>
+<%--        <div class='alert alert-success alert-dismissible fade show' role='alert'>--%>
+<%--            ${message}--%>
+<%--            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>--%>
+<%--                <span aria-hidden='true'>&times;</span>--%>
+<%--            </button>--%>
+<%--        </div>--%>
+
+<%--    </c:if>--%>
+<%--</div>--%>
+
+
+<form action="/edit" method="post">
+<%--    <div class="d-flex flex-wrap">--%>
+<%--        <%! int counter1 = 1; %>--%>
+<%--        <c:forEach var="image" items="${images}">--%>
+<%--            <div class="form-check">--%>
+<%--                <label class="form-check-label"><img src="{image.filepath}" class="img-thumbnail" height="200px"></label>--%>
+<%--                <input class="form-check-input" type="checkbox" id="image${image.id}">--%>
+<%--            </div>--%>
+<%--        </c:forEach>--%>
+<%--    </div>--%>
+
             <div class="form-group">
                 <label for="title">Title</label>
                 <input id="title" name="title" class="form-control" type="text" required value="${ad.title}">
@@ -42,8 +89,9 @@
                 </select>
 
             </div>
-            <input type="submit" class="btn btn-block btn-primary">
-        </form>
+        <input type="submit" class="btn btn-block btn-primary">
+
+</form>
 
 
 </c:when>
@@ -54,6 +102,7 @@
 </c:otherwise>
 </c:choose>
 </div>
+
 <jsp:include page="/WEB-INF/partials/script.jsp" />
 </body>
 </html>

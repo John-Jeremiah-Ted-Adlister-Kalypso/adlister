@@ -37,15 +37,18 @@
                    <span class="input-group-text"><i class="fa fa-eye-slash" id="toggleConfirm"></i></span></div></div>
 
             </div>
+
+            <input id="submit" type="submit" class="btn btn-primary btn-block">
+
             <div id="alert"><c:if test="${not empty alert}">
                 <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                <strong>Warning!</strong>The username "${alert}" is already in use! Select another username and resubmit to register.
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span>
-                </button></div>
+                    <strong>Warning!</strong>The username "${alert}" is already in use! Select another username and resubmit to register.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button></div>
 
             </c:if></div>
-            <input id="submit" type="submit" class="btn btn-primary btn-block">
+
         </form>
     </div>
 

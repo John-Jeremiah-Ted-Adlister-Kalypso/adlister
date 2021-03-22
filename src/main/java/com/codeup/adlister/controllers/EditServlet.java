@@ -29,7 +29,7 @@ public class EditServlet extends HttpServlet {
             request.setAttribute("isOwner", true);
         }
         request.setAttribute("categories", DaoFactory.getAdsDao().allCategories());
-        System.out.println("displayAd.getCategories() = " + displayAd.getCategories());
+//        System.out.println("displayAd.getCategories() = " + displayAd.getCategories());
         request.setAttribute("ad", displayAd);
         request.getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
 

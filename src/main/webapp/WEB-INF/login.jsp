@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,13 @@
 <body>
 
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
+<div id="alert"><c:if test="${not empty alert}">
+    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+    ${alert}
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+    </button></div>
+</c:if></div>
     <div class="container">
         <h1>Please Log In</h1>
         <form action="/login" method="POST">

@@ -9,5 +9,6 @@ public interface Images {
     List<String> imagesByAdID(long ad_id);
     void uploadImage(String filepath, long ad_id);
     void uploadImages(String [] arrayofimagefilepaths, long ad_id);
+    List<Image> imagesByUserID(long user_id);
 
 }

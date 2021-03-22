@@ -4,6 +4,7 @@ import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Image;
 import com.mysql.cj.jdbc.Driver;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,22 @@ public class MySQLImagesDao implements Images {
             }
             return images;
         } catch (SQLException e) {throw new RuntimeException("Error retrieving images for ad #"+ ad_id);}
+    }
+
+    public List<Image> imagesByUserID(long user_id) {
+        List<Image> images = new ArrayList<>();
+        String sql = "SELECT filepath, id_image FROM images AS i JOIN ads_images AS ai ON i.id_image = ai.id_images JOIN ads a on a.id = ai.ad_id where a.user_id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                images.add(new Image(
+                 rs.getLong("id_images"),
+                rs.getString("filepath")));
+            }
+            return images;
+        } catch (SQLException e) {throw new RuntimeException("Error retrieving images for user #"+ user_id);}
     }
 
     public void uploadImage(String filepath, long ad_id){
