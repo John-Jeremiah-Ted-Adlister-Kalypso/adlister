@@ -9,17 +9,23 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
-<div class="row">
-<c:forEach var="ad" items="${ads}">
-    <div class="col-md-6">
-        <h2><a href="/details?id=${ad.id}"><c:out value="${ad.title}"/></a></h2>
-        <p><c:out value="${ad.description}"/></p>
-       <small><p>Created <c:out value="${ad.created_time}" /> <br>
-        Last modified <c:out value="${ad.updated_time}" /> </p></small>
-    </div>
-</c:forEach>
+    <div class="row">
+        <c:forEach var="ad" items="${ads}">
+            <div class="card" style="width: 20rem; padding: 10px; margin: 20px">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/details?id=${ad.id}"><c:out value="${ad.title}"/></a></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"> <h6 class="card-subtitle mb-2 text-muted">Category: <c:forEach var="category" varStatus="loop" items="${ad.categories}"> ${category}<c:if test="${!loop.last}">,</c:if> </c:forEach> </h6></h6>
+                    <p class="card-text"><c:out value="${ad.description}"/><br>
+                    <hr>
+                    <br>
+                    <small>Created <c:out value="${ad.created_time}"/> <br>Last modified <c:out
+                            value="${ad.updated_time}"/></small>
+                </div>
+            </div>
 
-</div>
+        </c:forEach>
+
+    </div>
 </div>
 </body>
 </html>
