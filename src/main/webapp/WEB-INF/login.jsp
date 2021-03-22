@@ -11,7 +11,6 @@
 
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div id="alert"><c:if test="${not empty alert}">
-    <div class='alert alert-success alert-dismissible fade show' role='alert'>
     ${alert}
     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
     <span aria-hidden='true'>&times;</span>
