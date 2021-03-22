@@ -42,8 +42,9 @@ public class DetailsServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = parseInt(request.getParameter("adID"));
+//        System.out.println(id);
         System.out.println(id);
-        System.out.println(id);
+        DaoFactory.getAdsDao().deleteAllCategoriesByAdID(id);
         DaoFactory.getAdsDao().deleteByID(id);
         response.sendRedirect("/confirmdelete");}
 
