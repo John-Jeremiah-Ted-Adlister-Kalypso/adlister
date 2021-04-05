@@ -45,6 +45,9 @@ public class EditServlet extends HttpServlet {
         DaoFactory.getAdsDao().updateAdByID(id,request.getParameter("title"),request.getParameter("description"));
         String[] categories = request.getParameterValues("category");
         DaoFactory.getAdsDao().deleteAllCategoriesByAdID(id);
+        System.out.println("categories = " + categories);
+        System.out.println("categories[0] = " + categories[0]);
+        System.out.println("categories[1] = " + categories[1]);
         DaoFactory.getAdsDao().addCategoriesByAdID(id, categories);
         response.sendRedirect("/details?id=" + id);
     }

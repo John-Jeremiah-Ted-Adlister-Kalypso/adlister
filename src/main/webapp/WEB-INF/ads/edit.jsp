@@ -81,10 +81,8 @@
             <div class="form-group">
                 <label for="category">Select All Categories that Apply</label>
                 <select multiple class="form-control" id="category" name="category" required>
-                    <%! int counter = 1; %>
-                    <c:forEach var="category" items="${categories}">
-                        <option value="<%= counter %>"<c:forEach var="selectedcategory" items="${ad.categories}"><c:if test="${category} eq ${selectedcategory}"> selected</c:if></c:forEach> name="category">${category}</option>
-                        <% counter += 1; %>
+                    <c:forEach var="category" items="${categories}" varStatus="count">
+                        <option value="${count.count}"<c:forEach var="selectedcategory" items="${ad.categories}"><c:if test="${category} eq ${selectedcategory}"> selected</c:if></c:forEach> name="category">${category}</option>
                     </c:forEach>
                 </select>
 
